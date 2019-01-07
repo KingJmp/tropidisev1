@@ -292,6 +292,35 @@ if(cmd === `${prefix}help`){
   message.channel.send(helpEmbed)
 }
 
+  if(cmd === `${prefix}submit`) {
+    let link = args[0]; // Remember arrays are 0-based!.
+    let banID = args[1];
+    let banChannel = message.guild.channels.find("name", "check-appeals")
+    let submitEmbed = new Discord.RichEmbed()
+    .setTitle("Ban Appeal")
+    .setColor("#ffbb56")
+    .addField("Submitter", `<@${message.author.id}>`)
+    .addField("Link", link)
+    .addField("banID", banID)
+    .setFooter("TropidiseBANS")
+    .setTimestamp();
+
+    banChannel.send(submitEmbed);
+    message.reply("Submitted, please wait at least 5 days!");
+  }
+
+if(cmd === `${prefix}accept`){
+   if(!message.member.hasPermission("MANAGE_NICKNAMES")) return message.channel.send("Looks like you don't have permissions!");
+  const bUser = message.mentions.users.first();
+  bUser.send("You've been unbanned from Tropidise's main server! Here's a new link, https://discord.gg/uZ6hkYB!");
+}
+
+if(cmd === `${prefix}decline`){
+   if(!message.member.hasPermission("MANAGE_NICKNAMES")) return message.channel.send("Looks like you don't have permissions!");
+  const bUser = message.mentions.users.first();
+  bUser.send("You've been declined access from Tropidise's main server! Try appealing again soon.");
+}
+  
 });
 
 bot.login(botconfig.token);
