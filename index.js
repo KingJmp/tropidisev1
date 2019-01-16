@@ -323,4 +323,4 @@ if(cmd === `${prefix}decline`){
   
 });
 
-bot.login(botconfig.token);
+bot.login(process.env.BOT_TOKEN);
